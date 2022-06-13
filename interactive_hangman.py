@@ -2,6 +2,11 @@ import string
 from os import system
 
 #Functions
+def find_nth(string, substring, n):
+   if (n == 1):
+       return string.find(substring)
+   else:
+       return string.find(substring, find_nth(string, substring, n - 1) + 1)
 def best_char(current_wordlist,tested):
         letter_val_dict = {}
         for i in range (len(string.ascii_lowercase)):
@@ -28,13 +33,17 @@ def test_letter(current_wordlist,test_char):
             positions = input("Enter position, indexed 0, separated by commas if there are more than one, (1,2,6,9)").split(",")
             #char is inside
             print(positions)
-            n = 0
-            for i in range(len(current_wordlist)):
-                for j in range(len(positions)):
+            for j in range (len(positions)):
+                n = 0
+                for i in range(len(current_wordlist)):
+                    # Find word
                     current_word = current_wordlist[i-n]
-                    if current_word.find(test_char) != int(positions[j]):
+
+                    # [s]assy = 0; sas[s]y = 3
+                    if find_nth(current_word, current_char, j+1) != int(positions[j]):
                         current_wordlist.pop(i-n)
                         n = n+1
+                    
         else:
             #Char is not inside
             wrong = True
