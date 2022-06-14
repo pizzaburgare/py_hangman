@@ -30,7 +30,7 @@ def test_letter(current_wordlist,test_char):
         #User input instead
         wrong = False
         if input("Is the char < " + test_char + " > inside? y/n\n") == "y":
-            positions = input("Enter position, indexed 0, separated by commas if there are more than one, (1,2,6,9)").split(",")
+            positions = input("Enter position, indexed 0, separated by commas if there are more than one, (1,2,6,9)\n").split(",")
             #char is inside
             print(positions)
             for j in range (len(positions)):

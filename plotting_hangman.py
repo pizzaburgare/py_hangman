@@ -1,12 +1,14 @@
 import string
 from os import system
-
+from random import randint
 #Functions
+#Solving
 def find_nth(string, substring, n):
    if (n == 1):
        return string.find(substring)
    else:
        return string.find(substring, find_nth(string, substring, n - 1) + 1)
+
 def best_char(current_wordlist,tested):
         letter_val_dict = {}
         for i in range (len(string.ascii_lowercase)):
@@ -25,7 +27,6 @@ def best_char(current_wordlist,tested):
         # [(a,1232),(b,232)]
         return letter_val_dict[0][0]
         # a
-
 
 def test_letter(current_wordlist,test_char, word):
         #User input instead
@@ -88,6 +89,9 @@ def smart_solve(word):
         if len(local_wordlist)<2:
             return wrongs
             break
+#Save to file
+def write_arr_to_file(file, arr_in):
+    file.write(" ".join([str(elm) for elm in arr_in]))
 
 #Variables
 #Setup
@@ -95,11 +99,43 @@ def smart_solve(word):
 #Play
 f = open("../files/words.txt","r").read().splitlines()
 
+#Random list==========
+my_list = []
 for i in range(len(f)):
-    wrong_attempts = smart_solve(f[i])
-    system("clear")
-    print("\n")
-    print(f[i])
+    my_list.append(i)
+#=====================
+#Data collection======
+length_arr = []
+wrong_arr = []
+over_six_arr = []
+
+
+for i in range(len(f)):
+    r = randint(0, len(my_list)-1)
+    wrong_attempts = smart_solve(f[r])
+    word_length = len(f[r])
+    over_six = wrong_attempts>6
+
+    #Push to arr
+    length_arr.append(word_length)
+    wrong_arr.append(wrong_attempts)
+    over_six_arr.append(over_six)
+
+    #system("clear")
+    if i%100 == 99:
+        print(length_arr,"\n",wrong_arr,"\n",over_six_arr)
+        with open("out.txt", "w") as outfile:
+            write_arr_to_file(outfile, length_arr)
+            outfile.write("\n")
+            write_arr_to_file(outfile, wrong_arr)
+            outfile.write("\n")
+
+            write_arr_to_file(outfile, over_six_arr)
+
+
+    '''  print("\n")
+    print(f[r])
     print("Wrongs", wrong_attempts) 
-    print("Length", len(f[i])) 
-    print("Over 7:", wrong_attempts>7)
+    print("Length", word_length) 
+    print("Over 7:", over_six)'''
+    
