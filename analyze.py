@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import scipy
-infile_path = "./out.txt"
+infile_path = "./input.txt"
 
 f = open(infile_path,"r").read().splitlines()
 def str_arr_to_int(arr):
@@ -12,7 +12,7 @@ def str_arr_to_int(arr):
 
 length_arr = np.array(str_arr_to_int(f[0].split(" ")))
 wrong_arr = np.array(str_arr_to_int(f[1].split(" ")))
-over_six_arr = f[2]
+#over_six_arr = f[2]
 
 # pie charts per length
 def pie_charts():
@@ -40,10 +40,15 @@ def pie_charts():
             #y:[0,1,5,1,0,0]
             place = x.index(temp_wrong_arr[j])
             y[place] = y[place] + 1
-
+        my_colors = []
+        for j in range(len(x)):
+            if x[j]>7:
+                my_colors.append("red")
+            else:
+                my_colors.append("green")
         print(current_length)
         plt.subplot(5,5,i+1)
-        plt.pie(y,labels=x)
+        plt.pie(y,labels=x,colors=my_colors)
         plt.title(np.unique(length_arr)[i])
     plt.show()
 
@@ -51,5 +56,5 @@ pie_charts()
 
 plt.figure()
 plt.title("ScatterPlot fails of word length")
-plt.scatter(length_arr,wrong_arr, alpha=0.1)
+plt.scatter(length_arr,wrong_arr, alpha=0.005)
 plt.show()

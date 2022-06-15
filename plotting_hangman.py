@@ -107,30 +107,30 @@ for i in range(len(f)):
 #Data collection======
 length_arr = []
 wrong_arr = []
-over_six_arr = []
+#over_six_arr = []
 
 
 for i in range(len(f)):
     r = randint(0, len(my_list)-1)
     wrong_attempts = smart_solve(f[r])
     word_length = len(f[r])
-    over_six = wrong_attempts>6
+    #over_six = wrong_attempts>6
 
     #Push to arr
     length_arr.append(word_length)
     wrong_arr.append(wrong_attempts)
-    over_six_arr.append(over_six)
+    #over_six_arr.append(over_six)
 
     #system("clear")
-    if i%100 == 99:
-        print(length_arr,"\n",wrong_arr,"\n",over_six_arr)
-        with open("out.txt", "w") as outfile:
+    if i%50 == 49:
+        print(i)
+        with open("./out.txt", "w") as outfile:
             write_arr_to_file(outfile, length_arr)
             outfile.write("\n")
             write_arr_to_file(outfile, wrong_arr)
             outfile.write("\n")
-
             write_arr_to_file(outfile, over_six_arr)
+
 
 
     '''  print("\n")
