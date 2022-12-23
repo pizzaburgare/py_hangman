@@ -122,9 +122,10 @@ for i in range(len(f)):
     over_six_arr.append(over_six)
 
     #system("clear")
+    print(i)
     if i%100 == 99:
         print(length_arr,"\n",wrong_arr,"\n",over_six_arr)
-        with open("out.txt", "w") as outfile:
+        with open("saved.txt", "w") as outfile:
             write_arr_to_file(outfile, length_arr)
             outfile.write("\n")
             write_arr_to_file(outfile, wrong_arr)

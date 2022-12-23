@@ -44,7 +44,7 @@ def test_letter(current_wordlist,correct_word,test_char):
 
 #Variables
 global_counter = 0
-wordlist = open("./files/words.txt","r").read().splitlines()
+wordlist = open("../files/words.txt","r").read().splitlines()
 word = "abbreviations"
 length = len(word) #int(input("How long is the word?:\n"))
 already_tested = ""
